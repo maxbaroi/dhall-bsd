@@ -1,0 +1,4 @@
+.direnv
+*~
+# Ignore Dhall REPL history
+.history
