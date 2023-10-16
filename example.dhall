@@ -1,5 +1,7 @@
 let types = ./types.dhall
 
+let toJail = ./toJail.dhall
+
 let jailname
     : Text
     = "jail"
@@ -20,8 +22,4 @@ let config
     : types.Config
     = { jailname, host }
 
-in  ''
-        ${config.jailname} {
-            host.hostname = "${config.host.hostname}";
-        }
-    ''
+in  toJail config
