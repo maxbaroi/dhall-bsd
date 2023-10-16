@@ -1,16 +1,31 @@
-let name
+let jname
     : Text
-    = "test0"
+    = "jail"
 
-let Config
+let jdomain
+    : Text
+    = "test.com"
+
+let makeHostname = \(jname : Text) -> \(domain : Text) -> jname ++ "." ++ domain
+
+let Host
     : Type
     = { hostname : Text }
 
+let Config
+    : Type
+    = { jailname : Text, host : Host }
+
+let host
+    : Host
+    = { hostname = makeHostname jname jdomain }
+
 let config
     : Config
-    = { hostname = name }
+    = { jailname = jname, host }
 
 in  ''
-        ${config.hostname} {
+        ${config.jailname} {
+            host.hostname = "${config.host.hostname}";
         }
     ''
