@@ -1,3 +1,5 @@
+let types = ./types.dhall
+
 let jname
     : Text
     = "jail"
@@ -8,20 +10,12 @@ let jdomain
 
 let makeHostname = \(jname : Text) -> \(domain : Text) -> jname ++ "." ++ domain
 
-let Host
-    : Type
-    = { hostname : Text }
-
-let Config
-    : Type
-    = { jailname : Text, host : Host }
-
 let host
-    : Host
+    : types.Host
     = { hostname = makeHostname jname jdomain }
 
 let config
-    : Config
+    : types.Config
     = { jailname = jname, host }
 
 in  ''
